@@ -18,6 +18,21 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
+## Contact form setup
+
+The contact form uses [EmailJS](https://www.emailjs.com/) to send messages.
+
+1. Create an EmailJS account and connect an email service.
+2. Create a template using the form variables `user_name`, `user_email`, and `message`.
+3. Copy `.env.example` to `.env.local` and add the Service ID, Template ID, and Public Key from EmailJS.
+4. Restart the development server after changing environment variables.
+
+Configure EmailJS domain allowlisting and template abuse protection before deploying.
+
+## Admin project dashboard
+
+Copy `.env.example` to `.env.local` and configure the server-only values `ADMIN_EMAIL`, `ADMIN_PASSWORD`, and `ADMIN_SESSION_SECRET`. Open `/admin/login` to manage projects and skills. The public projects and skills sections read exclusively from MongoDB.
+
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
 ## Learn More
