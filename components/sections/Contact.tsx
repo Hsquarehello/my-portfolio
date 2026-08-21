@@ -53,19 +53,20 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+      className="mx-auto w-full max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
       {/* Section Header */}
-      <div className="text-center space-y-4 mb-16">
-        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-          Get In <span className="text-primary">Touch</span>
+      <div className="mb-14 space-y-3 border-b border-border pb-8">
+        <p className="section-kicker">Start a conversation / 03</p>
+        <h2 className="display-font text-4xl font-bold sm:text-5xl">
+          Let&apos;s make something useful.
         </h2>
-        <p className="text-muted-foreground max-w-2xl mx-auto">
+        <p className="max-w-xl text-muted-foreground">
           Have a project in mind or want to collaborate? Feel free to reach out
           to me directly!
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.8fr_1.2fr]">
         {/* Left Side: Contact Information */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
@@ -74,7 +75,7 @@ export default function Contact() {
           transition={{ duration: 0.5 }}
           className="space-y-8">
           <div className="space-y-4">
-            <h3 className="text-2xl font-bold">
+            <h3 className="display-font text-3xl font-bold">
               Let&apos;s talk about everything!
             </h3>
             <p className="text-muted-foreground">
@@ -85,7 +86,7 @@ export default function Contact() {
 
           <div className="space-y-6">
             <div className="flex items-center space-x-4">
-              <div className="p-3 bg-primary/10 text-primary rounded-lg">
+              <div className="rounded-full bg-accent p-3 text-primary">
                 <Mail className="w-6 h-6" />
               </div>
               <div>
@@ -99,12 +100,12 @@ export default function Contact() {
             </div>
 
             <div className="flex items-center space-x-4">
-              <div className="p-3 bg-primary/10 text-primary rounded-lg">
+              <div className="rounded-full bg-accent p-3 text-primary">
                 <MapPin className="w-6 h-6" />
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">Location</p>
-                <p className="font-medium">Yangon, Myanmar</p>
+                <p className="font-medium">Sagaing, Myanmar</p>
               </div>
             </div>
           </div>
@@ -116,7 +117,7 @@ export default function Contact() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="border border-border rounded-xl p-6 sm:p-8 bg-card shadow-sm">
+          className="rounded-2xl border border-border bg-card p-6 shadow-xl shadow-black/5 sm:p-8">
           <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
             {/* Name Field */}
             <div>
@@ -131,7 +132,7 @@ export default function Contact() {
                 name="user_name"
                 required
                 placeholder="John Doe"
-                className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                className="w-full rounded-xl border border-border bg-background px-4 py-3 transition-all placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30"
               />
             </div>
 
@@ -148,7 +149,7 @@ export default function Contact() {
                 name="user_email"
                 required
                 placeholder="john@example.com"
-                className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                className="w-full rounded-xl border border-border bg-background px-4 py-3 transition-all placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30"
               />
             </div>
 
@@ -165,7 +166,7 @@ export default function Contact() {
                 rows={4}
                 required
                 placeholder="Hello, I'd like to talk about..."
-                className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all resize-none"
+                className="w-full resize-none rounded-xl border border-border bg-background px-4 py-3 transition-all placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30"
               />
             </div>
 
@@ -196,7 +197,7 @@ export default function Contact() {
             <button
               type="submit"
               disabled={status === "loading"}
-              className="w-full py-3 px-6 bg-primary text-primary-foreground font-medium rounded-lg shadow hover:bg-primary/90 transition-all flex items-center justify-center space-x-2 disabled:opacity-50">
+              className="flex w-full items-center justify-center space-x-2 rounded-full bg-primary px-6 py-3 font-semibold text-primary-foreground shadow-lg shadow-primary/10 transition-all hover:brightness-95 disabled:opacity-50">
               {status === "loading" ? (
                 <>
                   <Loader2 className="w-5 h-5 animate-spin" />

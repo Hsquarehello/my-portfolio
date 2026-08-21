@@ -21,10 +21,12 @@ export default function AdminNavbar() {
   }
 
   return (
-    <header className="border-b border-border bg-card">
+    <header className="border-b border-border bg-card/90 backdrop-blur">
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
-        <Link href="/admin/projects" className="font-bold text-foreground">
-          Portfolio Admin
+        <Link
+          href="/admin/projects"
+          className="display-font text-xl font-bold text-foreground">
+          Portfolio<span className="text-primary">/</span>Admin
         </Link>
         <nav aria-label="Admin navigation" className="flex items-center gap-2">
           {links.map((link) => {
@@ -46,14 +48,14 @@ export default function AdminNavbar() {
             href="/"
             aria-label="Go to home page"
             title="Go to home page"
-            className="rounded-lg border border-border p-2 text-muted-foreground hover:bg-accent hover:text-foreground">
+            className="rounded-full border border-border p-2 text-muted-foreground hover:bg-accent hover:text-foreground">
             <House className="h-5 w-5" />
           </Link>
           <ThemeToggle />
           <button
             type="button"
             onClick={logout}
-            className="rounded-lg border border-border px-3 py-2 text-sm font-medium hover:bg-accent">
+            className="rounded-full border border-border px-3 py-2 text-sm font-medium hover:bg-accent">
             Sign out
           </button>
         </nav>

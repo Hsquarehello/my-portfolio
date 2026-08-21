@@ -72,22 +72,23 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+      className="mx-auto w-full max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
       {/* Section Header */}
-      <div className="text-center space-y-4 mb-16">
-        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-          Tech Stack & <span className="text-primary">Skills</span>
-        </h2>
-        <p className="text-muted-foreground max-w-2xl mx-auto">
+      <div className="mb-14 flex flex-col justify-between gap-5 border-b border-border pb-8 sm:flex-row sm:items-end">
+        <div className="space-y-3">
+          <p className="section-kicker">Capabilities / 02</p>
+          <h2 className="display-font text-4xl font-bold sm:text-5xl">
+            The tools I think with
+          </h2>
+        </div>
+        <p className="max-w-md text-sm leading-7 text-muted-foreground sm:text-right">
           A breakdown of my technical proficiencies and technologies I work with
           daily.
         </p>
       </div>
 
       {loading && (
-        <p className="mb-16 text-center text-muted-foreground">
-          Loading skills...
-        </p>
+        <p className="mb-16 text-muted-foreground">Loading skills...</p>
       )}
       {error && (
         <p className="mb-16 text-center text-muted-foreground">
@@ -101,7 +102,7 @@ export default function Skills() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
-        className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        className="grid grid-cols-1 gap-5 md:grid-cols-2">
         {categories.map(({ title, icon }) => {
           const categorySkills = skills.filter((s) => s.category === title);
 
@@ -109,10 +110,10 @@ export default function Skills() {
             <motion.div
               key={title}
               variants={cardVariants}
-              className="border border-border rounded-xl p-6 bg-card shadow-sm hover:shadow-md transition-shadow">
+              className="rounded-2xl border border-border bg-card p-6 transition-colors hover:border-primary/70">
               {/* Category Title with Icon */}
               <div className="flex items-center space-x-3 mb-6 pb-3 border-b border-border">
-                <div className="p-2 bg-primary/10 rounded-lg">{icon}</div>
+                <div className="rounded-full bg-accent p-2">{icon}</div>
                 <h3 className="text-xl font-bold">{title}</h3>
               </div>
 
@@ -128,10 +129,10 @@ export default function Skills() {
                     </div>
 
                     {/* Progress Bar Container */}
-                    <div className="w-full h-2.5 bg-muted rounded-full overflow-hidden">
+                    <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
                       {/* Animated Inner Progress Fill */}
                       <motion.div
-                        className="h-full bg-primary rounded-full"
+                        className="h-full rounded-full bg-primary"
                         initial={{ width: 0 }}
                         whileInView={{ width: `${skill.proficiency}%` }}
                         viewport={{ once: true }}

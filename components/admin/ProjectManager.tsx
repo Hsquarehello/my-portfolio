@@ -132,8 +132,12 @@ export default function ProjectManager() {
   }
 
   return (
-    <main className="min-h-screen bg-background px-4 py-10 text-foreground sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-background px-4 py-12 text-foreground sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl space-y-8">
+        <div className="space-y-2">
+          <p className="section-kicker">Workspace / projects</p>
+          <h1 className="display-font text-4xl font-bold">Manage your work.</h1>
+        </div>
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px]">
           <section className="space-y-4">
             <div className="flex items-center justify-between">
@@ -153,7 +157,7 @@ export default function ProjectManager() {
                 {projects.map((project) => (
                   <article
                     key={project.id}
-                    className="flex flex-col gap-4 rounded-xl border border-border bg-card p-5 sm:flex-row sm:items-start sm:justify-between">
+                    className="flex flex-col gap-4 rounded-2xl border border-border bg-card p-5 transition-colors hover:border-primary/70 sm:flex-row sm:items-start sm:justify-between">
                     <div className="space-y-2">
                       <div className="flex flex-wrap items-center gap-2">
                         <h3 className="font-semibold">{project.title}</h3>
@@ -187,7 +191,7 @@ export default function ProjectManager() {
 
           <form
             onSubmit={handleSubmit}
-            className="h-fit space-y-5 rounded-xl border border-border bg-card p-6">
+            className="h-fit space-y-5 rounded-2xl border border-border bg-card p-6 shadow-lg shadow-black/5">
             <div className="flex items-center justify-between">
               <h2 className="text-xl font-semibold">
                 {editingId ? "Edit project" : "New project"}
@@ -209,7 +213,7 @@ export default function ProjectManager() {
               onChange={(event) =>
                 setForm({ ...form, title: event.target.value })
               }
-              className="w-full rounded-lg border border-border bg-background px-3 py-2"
+              className="w-full rounded-xl border border-border bg-background px-3 py-2"
             />
             <textarea
               required
@@ -219,7 +223,7 @@ export default function ProjectManager() {
               onChange={(event) =>
                 setForm({ ...form, description: event.target.value })
               }
-              className="w-full rounded-lg border border-border bg-background px-3 py-2"
+              className="w-full rounded-xl border border-border bg-background px-3 py-2"
             />
             <select
               value={form.category}
@@ -246,7 +250,7 @@ export default function ProjectManager() {
                       addTechnology();
                     }
                   }}
-                  className="min-w-0 flex-1 rounded-lg border border-border bg-background px-3 py-2"
+                  className="min-w-0 flex-1 rounded-xl border border-border bg-background px-3 py-2"
                 />
                 <button
                   type="button"
@@ -281,7 +285,7 @@ export default function ProjectManager() {
               onChange={(event) =>
                 setForm({ ...form, githubUrl: event.target.value })
               }
-              className="w-full rounded-lg border border-border bg-background px-3 py-2"
+              className="w-full rounded-xl border border-border bg-background px-3 py-2"
             />
             <input
               type="url"
@@ -290,7 +294,7 @@ export default function ProjectManager() {
               onChange={(event) =>
                 setForm({ ...form, liveUrl: event.target.value })
               }
-              className="w-full rounded-lg border border-border bg-background px-3 py-2"
+              className="w-full rounded-xl border border-border bg-background px-3 py-2"
             />
             <label className="flex items-center gap-2 text-sm">
               <input

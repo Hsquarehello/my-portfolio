@@ -49,13 +49,16 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+      className="mx-auto w-full max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
       {/* Section Heading */}
-      <div className="text-center space-y-4 mb-12">
-        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-          Featured <span className="text-primary">Projects</span>
-        </h2>
-        <p className="text-muted-foreground max-w-2xl mx-auto">
+      <div className="mb-12 flex flex-col justify-between gap-5 border-b border-border pb-8 sm:flex-row sm:items-end">
+        <div className="space-y-3">
+          <p className="section-kicker">Selected work / 01</p>
+          <h2 className="display-font text-4xl font-bold sm:text-5xl">
+            Things I&apos;ve built
+          </h2>
+        </div>
+        <p className="max-w-md text-sm leading-7 text-muted-foreground sm:text-right">
           Explore my recent work across full-stack applications, interactive
           user interfaces, and robust backend services.
         </p>
@@ -73,7 +76,7 @@ export default function Projects() {
       )}
 
       {/* Filter Buttons */}
-      <div className="flex flex-wrap justify-center gap-2 mb-12">
+      <div className="mb-12 flex flex-wrap gap-2">
         {categories.map((category) => (
           <button
             key={category}
@@ -81,7 +84,7 @@ export default function Projects() {
             className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
               activeCategory === category
                 ? "bg-primary text-primary-foreground shadow-md"
-                : "bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                : "border border-border bg-transparent text-muted-foreground hover:bg-accent hover:text-accent-foreground"
             }`}>
             {category}
           </button>
@@ -101,7 +104,7 @@ export default function Projects() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.3 }}
-              className="flex flex-col justify-between border rounded-xl p-6 bg-card hover:shadow-lg transition-shadow border-border">
+              className="group flex flex-col justify-between rounded-2xl border border-border bg-card p-6 transition-all hover:-translate-y-1 hover:border-primary/70 hover:shadow-xl hover:shadow-primary/10">
               <div>
                 {/* Header: Icon & Links */}
                 <div className="flex items-center justify-between mb-4">
@@ -142,7 +145,7 @@ export default function Projects() {
                 {project.technologies.map((tech) => (
                   <span
                     key={tech}
-                    className="px-2.5 py-1 bg-secondary text-secondary-foreground rounded-md text-xs font-mono">
+                    className="rounded-full bg-muted px-2.5 py-1 text-xs font-medium text-muted-foreground">
                     {tech}
                   </span>
                 ))}

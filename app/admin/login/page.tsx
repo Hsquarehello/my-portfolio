@@ -33,15 +33,13 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-background px-4 text-foreground">
+    <main className="hero-grid flex min-h-screen items-center justify-center bg-background px-4 text-foreground">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md space-y-6 rounded-xl border border-border bg-card p-8 shadow-sm">
+        className="w-full max-w-md space-y-6 rounded-2xl border border-border bg-card p-8 shadow-2xl shadow-black/10">
         <div className="space-y-2">
-          <p className="text-sm font-semibold uppercase tracking-wide text-primary">
-            Portfolio admin
-          </p>
-          <h1 className="text-3xl font-bold">Sign in</h1>
+          <p className="section-kicker text-primary">Portfolio / admin</p>
+          <h1 className="display-font text-4xl font-bold">Sign in</h1>
           <p className="text-sm text-muted-foreground">
             Manage the projects shown on your portfolio.
           </p>
@@ -55,7 +53,7 @@ export default function AdminLoginPage() {
               required
               value={email}
               onChange={(event) => setEmail(event.target.value)}
-              className="w-full rounded-lg border border-border bg-background px-4 py-3 outline-none focus:ring-2 focus:ring-primary/50"
+              className="w-full rounded-xl border border-border bg-background px-4 py-3 outline-none focus:border-primary focus:ring-2 focus:ring-primary/30"
             />
           </label>
           <label className="block space-y-2 text-sm font-medium">
@@ -65,7 +63,7 @@ export default function AdminLoginPage() {
               required
               value={password}
               onChange={(event) => setPassword(event.target.value)}
-              className="w-full rounded-lg border border-border bg-background px-4 py-3 outline-none focus:ring-2 focus:ring-primary/50"
+              className="w-full rounded-xl border border-border bg-background px-4 py-3 outline-none focus:border-primary focus:ring-2 focus:ring-primary/30"
             />
           </label>
         </div>
@@ -75,7 +73,7 @@ export default function AdminLoginPage() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full rounded-lg bg-primary px-4 py-3 font-medium text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-50">
+          className="w-full rounded-full bg-primary px-4 py-3 font-semibold text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-50">
           {loading ? "Signing in..." : "Sign in"}
         </button>
       </form>

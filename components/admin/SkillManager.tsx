@@ -124,8 +124,14 @@ export default function SkillManager() {
   }
 
   return (
-    <section className="border-t border-border bg-muted/30 px-4 py-10 text-foreground sm:px-6 lg:px-8">
+    <section className="border-t border-border bg-muted/30 px-4 py-12 text-foreground sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[minmax(0,1fr)_360px]">
+        <div className="space-y-2 lg:col-span-2">
+          <p className="section-kicker">Workspace / skills</p>
+          <h1 className="display-font text-4xl font-bold">
+            Shape your toolkit.
+          </h1>
+        </div>
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-semibold">Skills</h2>
@@ -144,7 +150,7 @@ export default function SkillManager() {
               {skills.map((skill) => (
                 <article
                   key={skill.id ?? skill.name}
-                  className="rounded-xl border border-border bg-card p-4">
+                  className="rounded-2xl border border-border bg-card p-4 transition-colors hover:border-primary/70">
                   <div className="flex items-start justify-between gap-3">
                     <div>
                       <h3 className="font-semibold">{skill.name}</h3>
@@ -178,7 +184,7 @@ export default function SkillManager() {
 
         <form
           onSubmit={handleSubmit}
-          className="h-fit space-y-4 rounded-xl border border-border bg-card p-6">
+          className="h-fit space-y-4 rounded-2xl border border-border bg-card p-6 shadow-lg shadow-black/5">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-semibold">
               {editingId ? "Edit skill" : "New skill"}
