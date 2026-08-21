@@ -87,7 +87,7 @@ export default function Hero() {
               <FaLinkedin className="w-5 h-5" />
             </a>
             <a
-              href="mailto:your.email@example.com"
+              href="mailto:real203play@gmail.com"
               className="p-3 border rounded-lg hover:bg-accent transition-colors"
               aria-label="Send Email">
               <Mail className="w-5 h-5" />

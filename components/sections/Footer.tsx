@@ -39,7 +39,7 @@ export default function Footer() {
 
         <div className="flex items-center gap-3">
           <a
-            href="https://github.com/yourusername"
+            href="https://github.com/Hsquarehello"
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-lg border border-border p-2.5 text-muted-foreground hover:bg-accent hover:text-foreground transition-colors"
@@ -47,7 +47,7 @@ export default function Footer() {
             <FaGithub className="h-5 w-5" />
           </a>
           <a
-            href="https://linkedin.com/in/yourusername"
+            href="https://www.facebook.com/ReadOnlyUser"
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-lg border border-border p-2.5 text-muted-foreground hover:bg-accent hover:text-foreground transition-colors"
@@ -55,7 +55,7 @@ export default function Footer() {
             <FaLinkedin className="h-5 w-5" />
           </a>
           <a
-            href="mailto:your.email@example.com"
+            href="mailto:real203play@gmail.com"
             className="rounded-lg border border-border p-2.5 text-muted-foreground hover:bg-accent hover:text-foreground transition-colors"
             aria-label="Send Email">
             <Mail className="h-5 w-5" />
