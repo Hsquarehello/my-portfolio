@@ -46,6 +46,28 @@ export default function Projects() {
     return project.category === activeCategory;
   });
 
+  const cardVariants = {
+    hidden: { opacity: 0, y: 28, scale: 0.94 },
+    visible: (index: number) => ({
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        delay: index * 0.07,
+        type: "spring" as const,
+        stiffness: 330,
+        damping: 24,
+        mass: 0.7,
+      },
+    }),
+    exit: {
+      opacity: 0,
+      y: -22,
+      scale: 0.92,
+      transition: { duration: 0.2, ease: "easeIn" as const },
+    },
+  };
+
   return (
     <section
       id="projects"
@@ -81,29 +103,39 @@ export default function Projects() {
           <button
             key={category}
             onClick={() => setActiveCategory(category)}
-            className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+            className={`relative px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
               activeCategory === category
-                ? "bg-primary text-primary-foreground shadow-md"
+                ? "text-primary-foreground"
                 : "border border-border bg-transparent text-muted-foreground hover:bg-accent hover:text-accent-foreground"
             }`}>
-            {category}
+            {activeCategory === category && (
+              <motion.span
+                layoutId="active-project-filter"
+                className="absolute inset-0 z-0 rounded-full bg-primary shadow-md"
+                transition={{ type: "spring", stiffness: 500, damping: 35 }}
+              />
+            )}
+            <span className="relative z-10">{category}</span>
           </button>
         ))}
       </div>
 
       {/* Projects Grid with Animations */}
       <motion.div
-        layout
+        layout="position"
         className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <AnimatePresence>
-          {filteredProjects.map((project) => (
+        <AnimatePresence mode="popLayout">
+          {filteredProjects.map((project, index) => (
             <motion.div
-              layout
+              layout="position"
               key={project.id}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.3 }}
+              custom={index}
+              variants={cardVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              whileHover={{ y: -8, rotate: index % 2 === 0 ? -0.5 : 0.5 }}
+              whileTap={{ scale: 0.98 }}
               className="group flex flex-col justify-between rounded-2xl border border-border bg-card p-6 transition-all hover:-translate-y-1 hover:border-primary/70 hover:shadow-xl hover:shadow-primary/10">
               <div>
                 {/* Header: Icon & Links */}
