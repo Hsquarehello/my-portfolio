@@ -34,11 +34,13 @@ export default function Hero() {
       className="hero-grid relative flex min-h-screen items-center overflow-hidden bg-background px-4 pb-20 pt-6 text-foreground sm:px-6 lg:px-8 lg:pb-24">
       <div className="pointer-events-none absolute -right-48 top-36 h-128 w-lg rounded-full border border-primary/30 bg-primary/10 blur-3xl" />
       <header className="absolute inset-x-4 top-6 z-10 mx-auto flex max-w-7xl items-center justify-between sm:inset-x-6 lg:inset-x-8">
+        {/* Logo */}
         <Link
           href="#home"
           className="display-font text-xl font-bold tracking-tight">
           HH<span className="text-primary">.</span>
         </Link>
+        {/* Nav Links */}
         <nav
           className="hidden items-center gap-7 text-sm text-muted-foreground sm:flex"
           aria-label="Main navigation">
@@ -58,8 +60,10 @@ export default function Hero() {
             Contact
           </Link>
         </nav>
+        {/* ThemeToggle Icon */}
         <ThemeToggle />
       </header>
+      
       <motion.div
         variants={containerVariants}
         initial="hidden"

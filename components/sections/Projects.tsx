@@ -86,17 +86,6 @@ export default function Projects() {
         </p>
       </div>
 
-      {loading && (
-        <p className="mb-12 text-center text-muted-foreground">
-          Loading projects...
-        </p>
-      )}
-      {error && (
-        <p className="mb-12 text-center text-muted-foreground">
-          Projects are currently unavailable.
-        </p>
-      )}
-
       {/* Filter Buttons */}
       <div className="mb-12 flex flex-wrap gap-2">
         {categories.map((category) => (
@@ -119,6 +108,17 @@ export default function Projects() {
           </button>
         ))}
       </div>
+
+      {loading && (
+        <p className="mb-12 text-center text-muted-foreground">
+          Loading projects...
+        </p>
+      )}
+      {error && (
+        <p className="mb-12 text-center text-muted-foreground">
+          Projects are currently unavailable.
+        </p>
+      )}
 
       {/* Projects Grid with Animations */}
       <motion.div
