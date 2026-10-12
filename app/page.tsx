@@ -9,8 +9,8 @@ export default function Home() {
     <>
       <main id="home" className="flex flex-col items-center justify-between">
         <Hero />
-        <Projects />
         <Skills />
+        <Projects />
         <Contact />
         {/* အခြား Sections များကို အောက်တွင် ဆက်လက်ထည့်သွင်းသွားမည် */}
       </main>

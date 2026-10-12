@@ -9,6 +9,7 @@ type ProjectForm = Omit<Project, "id">;
 const emptyForm: ProjectForm = {
   title: "",
   description: "",
+  imageUrl: "",
   category: "Frontend",
   technologies: [],
   githubUrl: "",
@@ -113,6 +114,7 @@ export default function ProjectManager() {
     setForm({
       title: project.title,
       description: project.description,
+      imageUrl: project.imageUrl ?? "",
       category: project.category,
       technologies: project.technologies,
       githubUrl: project.githubUrl,
@@ -222,6 +224,15 @@ export default function ProjectManager() {
               value={form.description}
               onChange={(event) =>
                 setForm({ ...form, description: event.target.value })
+              }
+              className="w-full rounded-xl border border-border bg-background px-3 py-2"
+            />
+            <input
+              type="text"
+              placeholder="Thumbnail path (/images/project.jpg)"
+              value={form.imageUrl ?? ""}
+              onChange={(event) =>
+                setForm({ ...form, imageUrl: event.target.value })
               }
               className="w-full rounded-xl border border-border bg-background px-3 py-2"
             />

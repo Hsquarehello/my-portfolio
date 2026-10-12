@@ -4,8 +4,32 @@ import { motion, type Variants } from "framer-motion";
 import Image from "next/image";
 import { ArrowDown, ArrowUpRight, Mail } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa6";
+import type { IconType } from "react-icons";
+import {
+  SiCss,
+  SiGit,
+  SiHtml5,
+  SiJavascript,
+  SiMongodb,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiReact,
+  SiTypescript,
+} from "react-icons/si";
 import Link from "next/link";
 import { ThemeToggle } from "../ui/ThemeToggle";
+
+const technologies: { name: string; Icon: IconType; color: string }[] = [
+  { name: "HTML5", Icon: SiHtml5, color: "#e34f26" },
+  { name: "CSS3", Icon: SiCss, color: "#1572b6" },
+  { name: "JavaScript", Icon: SiJavascript, color: "#f7df1e" },
+  { name: "TypeScript", Icon: SiTypescript, color: "#3178c6" },
+  { name: "React", Icon: SiReact, color: "#61dafb" },
+  { name: "Next.js", Icon: SiNextdotjs, color: "currentColor" },
+  { name: "Node.js", Icon: SiNodedotjs, color: "#5fa04e" },
+  { name: "MongoDB", Icon: SiMongodb, color: "#47a248" },
+  { name: "Git", Icon: SiGit, color: "#f05032" },
+];
 
 export default function Hero() {
   // Staggered animation variants
@@ -63,7 +87,7 @@ export default function Hero() {
         {/* ThemeToggle Icon */}
         <ThemeToggle />
       </header>
-      
+
       <motion.div
         variants={containerVariants}
         initial="hidden"
@@ -137,6 +161,25 @@ export default function Hero() {
             <span>
               <strong className="text-foreground">MERN</strong> focused
             </span>
+          </motion.div>
+
+          <motion.div variants={itemVariants} className="mt-8">
+            <p className="section-kicker">Technologies I work with</p>
+            <div
+              aria-label="Technologies I work with"
+              className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-4">
+              {technologies.map(({ name, Icon, color }) => (
+                <span
+                  key={name}
+                  role="img"
+                  aria-label={name}
+                  title={name}
+                  className="text-muted-foreground transition-transform hover:-translate-y-0.5"
+                  style={{ color }}>
+                  <Icon aria-hidden="true" className="h-6 w-6" />
+                </span>
+              ))}
+            </div>
           </motion.div>
         </div>
 

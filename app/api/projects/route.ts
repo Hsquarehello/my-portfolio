@@ -16,6 +16,7 @@ function serializeProject(project: {
 function isProjectInput(value: unknown): value is {
   title: string;
   description: string;
+  imageUrl?: string;
   category: (typeof categories)[number];
   technologies: string[];
   githubUrl?: string;
@@ -28,6 +29,7 @@ function isProjectInput(value: unknown): value is {
   return (
     typeof project.title === "string" &&
     typeof project.description === "string" &&
+    (project.imageUrl === undefined || typeof project.imageUrl === "string") &&
     typeof project.category === "string" &&
     categories.includes(project.category as (typeof categories)[number]) &&
     Array.isArray(project.technologies) &&
