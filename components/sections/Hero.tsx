@@ -69,6 +69,11 @@ export default function Hero() {
           className="hidden items-center gap-7 text-sm text-muted-foreground sm:flex"
           aria-label="Main navigation">
           <Link
+            href="#about"
+            className="transition-colors hover:text-foreground">
+            About
+          </Link>
+          <Link
             href="#projects"
             className="transition-colors hover:text-foreground">
             Work
