@@ -142,22 +142,34 @@ export default function Projects() {
           <div
             role="status"
             aria-label="Loading projects"
-            className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            className={carouselMinHeight}>
             <span className="sr-only">Loading projects...</span>
-            {Array.from({ length: 3 }, (_, skeletonIndex) => (
-              <div
-                key={skeletonIndex}
-                aria-hidden="true"
-                className="overflow-hidden border border-border bg-card">
-                <div className="aspect-video animate-pulse bg-muted" />
-                <div className="space-y-4 p-5">
-                  <div className="h-3 w-20 animate-pulse rounded bg-muted" />
-                  <div className="h-6 w-2/3 animate-pulse rounded bg-muted" />
-                  <div className="h-3 w-full animate-pulse rounded bg-muted" />
-                  <div className="h-3 w-3/4 animate-pulse rounded bg-muted" />
+            {/* Mirrors the carousel page: 1 card on mobile, 2 on md, 3 on lg.
+                Visibility is CSS-driven so the server-rendered markup shows the
+                correct card count before hydration. */}
+            <div
+              aria-hidden="true"
+              className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {Array.from({ length: 3 }, (_, skeletonIndex) => (
+                <div
+                  key={skeletonIndex}
+                  className={`min-h-80 overflow-hidden border border-border bg-card ${
+                    skeletonIndex === 1
+                      ? "hidden md:block"
+                      : skeletonIndex === 2
+                        ? "hidden lg:block"
+                        : ""
+                  }`}>
+                  <div className="aspect-video animate-pulse bg-muted" />
+                  <div className="space-y-4 p-5">
+                    <div className="h-3 w-20 animate-pulse rounded bg-muted" />
+                    <div className="h-6 w-2/3 animate-pulse rounded bg-muted" />
+                    <div className="h-3 w-full animate-pulse rounded bg-muted" />
+                    <div className="h-3 w-3/4 animate-pulse rounded bg-muted" />
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         )}
         {error && (
