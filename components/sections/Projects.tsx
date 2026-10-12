@@ -63,6 +63,10 @@ export default function Projects() {
     if (activeCategory === "All") return true;
     return project.category === activeCategory;
   });
+  const hasProjectImages = projects.some((project) => project.imageUrl);
+  const carouselMinHeight = hasProjectImages
+    ? "min-h-[calc(56.25vw+12.375rem)] sm:min-h-[calc(56.25vw+11.8125rem)] md:min-h-[calc(28.125vw+12.25rem)] lg:min-h-112"
+    : "min-h-80";
   const projectPages = Array.from(
     { length: Math.ceil(filteredProjects.length / cardsPerPage) },
     (_, pageIndex) =>
@@ -84,10 +88,9 @@ export default function Projects() {
   }
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 18 },
+    hidden: { opacity: 0 },
     visible: (index: number) => ({
       opacity: 1,
-      y: 0,
       transition: {
         delay: index * 0.06,
         duration: 0.42,
@@ -96,7 +99,6 @@ export default function Projects() {
     }),
     exit: {
       opacity: 0,
-      y: 10,
       transition: { duration: 0.18, ease: "easeIn" as const },
     },
   };
@@ -124,7 +126,7 @@ export default function Projects() {
               onClick={() => {
                 setActiveCategory(category);
                 setActivePage(0);
-                carouselRef.current?.scrollTo({ left: 0, behavior: "smooth" });
+                carouselRef.current?.scrollTo({ left: 0, behavior: "auto" });
               }}
               className={`border-b-2 px-1 py-2 text-sm font-medium transition-colors ${
                 activeCategory === category
@@ -180,7 +182,9 @@ export default function Projects() {
               current === pageIndex ? current : pageIndex,
             );
           }}
-          className="flex snap-x snap-mandatory gap-0 overflow-x-auto scroll-smooth scrollbar-none [&::-webkit-scrollbar]:hidden">
+          className={`flex snap-x snap-proximity gap-0 overflow-x-auto scrollbar-none [&::-webkit-scrollbar]:hidden ${
+            !loading && filteredProjects.length > 0 ? carouselMinHeight : ""
+          }`}>
           <AnimatePresence mode="popLayout">
             {projectPages.map((page, pageIndex) => (
               <div
@@ -195,7 +199,6 @@ export default function Projects() {
 
                     return (
                       <motion.article
-                        layout="position"
                         key={project.id}
                         custom={index}
                         variants={cardVariants}
@@ -203,10 +206,9 @@ export default function Projects() {
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.2 }}
                         exit="exit"
-                        whileHover={{ y: -4 }}
-                        className="group overflow-hidden border border-border bg-card transition-[border-color,box-shadow] duration-300 hover:border-primary/60 hover:shadow-xl hover:shadow-primary/10">
-                        <div className="relative aspect-video overflow-hidden bg-muted">
-                          {project.imageUrl ? (
+                        className="group min-h-80 overflow-hidden border border-border bg-card transition-[border-color,box-shadow] duration-300 hover:border-primary/60 hover:shadow-xl hover:shadow-primary/10">
+                        {project.imageUrl && (
+                          <div className="relative aspect-video overflow-hidden bg-muted">
                             <Image
                               src={project.imageUrl}
                               alt={`${project.title} project preview`}
@@ -215,19 +217,23 @@ export default function Projects() {
                               sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                               className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                             />
-                          ) : (
-                            <div
-                              aria-hidden="true"
-                              className="grid h-full place-items-center bg-accent text-primary">
-                              <FolderGit2 className="h-10 w-10 opacity-70" />
-                            </div>
-                          )}
-                          <span className="absolute left-3 top-3 bg-background/90 px-2 py-1 text-xs font-semibold tabular-nums">
-                            {String(projectIndex + 1).padStart(2, "0")}
-                          </span>
-                        </div>
+                            <span className="absolute left-3 top-3 bg-background/90 px-2 py-1 text-xs font-semibold tabular-nums">
+                              {String(projectIndex + 1).padStart(2, "0")}
+                            </span>
+                          </div>
+                        )}
 
                         <div className="flex min-h-52 flex-col p-5">
+                          {!project.imageUrl && (
+                            <div className="mb-5 flex items-center justify-between border-b border-border pb-4">
+                              <div className="grid h-10 w-10 place-items-center bg-accent text-primary">
+                                <FolderGit2 className="h-5 w-5" />
+                              </div>
+                              <span className="text-xs font-semibold tabular-nums text-muted-foreground">
+                                {String(projectIndex + 1).padStart(2, "0")}
+                              </span>
+                            </div>
+                          )}
                           <p className="section-kicker">{project.category}</p>
                           <h3 className="mt-2 text-xl font-semibold">
                             {project.title}
