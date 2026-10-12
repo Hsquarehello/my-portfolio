@@ -47,24 +47,20 @@ export default function Projects() {
   });
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 28, scale: 0.94 },
+    hidden: { opacity: 0, y: 18 },
     visible: (index: number) => ({
       opacity: 1,
       y: 0,
-      scale: 1,
       transition: {
-        delay: index * 0.07,
-        type: "spring" as const,
-        stiffness: 330,
-        damping: 24,
-        mass: 0.7,
+        delay: index * 0.06,
+        duration: 0.42,
+        ease: "easeOut" as const,
       },
     }),
     exit: {
       opacity: 0,
-      y: -22,
-      scale: 0.92,
-      transition: { duration: 0.2, ease: "easeIn" as const },
+      y: 10,
+      transition: { duration: 0.18, ease: "easeIn" as const },
     },
   };
 
@@ -110,9 +106,37 @@ export default function Projects() {
       </div>
 
       {loading && (
-        <p className="mb-12 text-center text-muted-foreground">
-          Loading projects...
-        </p>
+        <div
+          role="status"
+          aria-label="Loading projects"
+          className="mb-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <span className="sr-only">Loading projects...</span>
+          {Array.from({ length: 3 }, (_, skeletonIndex) => (
+            <div
+              key={skeletonIndex}
+              aria-hidden="true"
+              className="flex min-h-70 flex-col justify-between rounded-2xl border border-border bg-card p-6">
+              <div>
+                <div className="mb-4 flex items-center justify-between">
+                  <div className="h-10 w-10 animate-pulse rounded-lg bg-muted" />
+                  <div className="flex gap-3">
+                    <div className="h-5 w-5 animate-pulse rounded-full bg-muted" />
+                    <div className="h-5 w-5 animate-pulse rounded-full bg-muted" />
+                  </div>
+                </div>
+                <div className="mb-3 h-6 w-2/3 animate-pulse rounded bg-muted" />
+                <div className="mb-2 h-3 w-full animate-pulse rounded bg-muted" />
+                <div className="mb-2 h-3 w-11/12 animate-pulse rounded bg-muted" />
+                <div className="h-3 w-3/4 animate-pulse rounded bg-muted" />
+              </div>
+              <div className="flex gap-2 border-t border-border pt-4">
+                <div className="h-6 w-16 animate-pulse rounded-full bg-muted" />
+                <div className="h-6 w-20 animate-pulse rounded-full bg-muted" />
+                <div className="h-6 w-14 animate-pulse rounded-full bg-muted" />
+              </div>
+            </div>
+          ))}
+        </div>
       )}
       {error && (
         <p className="mb-12 text-center text-muted-foreground">
@@ -132,11 +156,12 @@ export default function Projects() {
               custom={index}
               variants={cardVariants}
               initial="hidden"
-              animate="visible"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
               exit="exit"
-              whileHover={{ y: -8, rotate: index % 2 === 0 ? -0.5 : 0.5 }}
-              whileTap={{ scale: 0.98 }}
-              className="group flex flex-col justify-between rounded-2xl border border-border bg-card p-6 transition-all hover:-translate-y-1 hover:border-primary/70 hover:shadow-xl hover:shadow-primary/10">
+              whileHover={{ y: -5 }}
+              whileTap={{ scale: 0.99 }}
+              className="group flex flex-col justify-between rounded-2xl border border-border bg-card p-6 transition-[border-color,box-shadow] duration-300 hover:border-primary/70 hover:shadow-xl hover:shadow-primary/10">
               <div>
                 {/* Header: Icon & Links */}
                 <div className="flex items-center justify-between mb-4">

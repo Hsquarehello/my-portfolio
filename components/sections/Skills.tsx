@@ -19,6 +19,13 @@ const categories: { title: SkillCategory; icon: React.ReactNode }[] = [
   },
 ];
 
+const skillPlaceholderCounts: Record<SkillCategory, number> = {
+  Frontend: 4,
+  Backend: 4,
+  "Database & Cloud": 5,
+  "Tools & Others": 4,
+};
+
 export default function Skills() {
   const [skills, setSkills] = useState<Skill[]>([]);
   const [loading, setLoading] = useState(true);
@@ -88,7 +95,9 @@ export default function Skills() {
       </div>
 
       {loading && (
-        <p className="mb-16 text-muted-foreground">Loading skills...</p>
+        <p role="status" className="sr-only">
+          Loading skills...
+        </p>
       )}
       {error && (
         <p className="mb-16 text-center text-muted-foreground">
@@ -102,6 +111,7 @@ export default function Skills() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
+        aria-busy={loading}
         className="grid grid-cols-1 gap-5 md:grid-cols-2">
         {categories.map(({ title, icon }) => {
           const categorySkills = skills.filter((s) => s.category === title);
@@ -119,28 +129,44 @@ export default function Skills() {
 
               {/* Skill Bars */}
               <div className="space-y-5">
-                {categorySkills.map((skill) => (
-                  <div key={skill.name} className="space-y-2">
-                    <div className="flex justify-between text-sm font-medium">
-                      <span>{skill.name}</span>
-                      <span className="text-muted-foreground">
-                        {skill.proficiency}%
-                      </span>
-                    </div>
+                {loading
+                  ? Array.from(
+                      { length: skillPlaceholderCounts[title] },
+                      (_, placeholderIndex) => (
+                        <div
+                          key={placeholderIndex}
+                          aria-hidden="true"
+                          className="space-y-2">
+                          <div className="flex h-5 items-center justify-between">
+                            <div className="h-3.5 w-32 animate-pulse rounded bg-muted" />
+                            <div className="h-3.5 w-9 animate-pulse rounded bg-muted" />
+                          </div>
+                          <div className="h-2 w-full animate-pulse rounded-full bg-muted" />
+                        </div>
+                      ),
+                    )
+                  : categorySkills.map((skill) => (
+                      <div key={skill.name} className="space-y-2">
+                        <div className="flex justify-between text-sm font-medium">
+                          <span>{skill.name}</span>
+                          <span className="text-muted-foreground">
+                            {skill.proficiency}%
+                          </span>
+                        </div>
 
-                    {/* Progress Bar Container */}
-                    <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
-                      {/* Animated Inner Progress Fill */}
-                      <motion.div
-                        className="h-full rounded-full bg-primary"
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.proficiency}%` }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, ease: "easeOut" }}
-                      />
-                    </div>
-                  </div>
-                ))}
+                        {/* Progress Bar Container */}
+                        <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
+                          {/* Animated Inner Progress Fill */}
+                          <motion.div
+                            className="h-full rounded-full bg-primary"
+                            initial={{ width: 0 }}
+                            whileInView={{ width: `${skill.proficiency}%` }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1, ease: "easeOut" }}
+                          />
+                        </div>
+                      </div>
+                    ))}
               </div>
             </motion.div>
           );
