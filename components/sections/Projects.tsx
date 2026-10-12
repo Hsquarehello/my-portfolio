@@ -174,25 +174,36 @@ export default function Projects() {
           tabIndex={0}
           onScroll={() => {
             const carousel = carouselRef.current;
-            if (!carousel) return;
-            const pageIndex = Math.round(
-              carousel.scrollLeft / carousel.clientWidth,
+            if (!carousel || projectPages.length === 0) return;
+            const pageIndex = Math.min(
+              Math.max(
+                Math.round(carousel.scrollLeft / carousel.clientWidth),
+                0,
+              ),
+              projectPages.length - 1,
             );
             setActivePage((current) =>
               current === pageIndex ? current : pageIndex,
             );
           }}
-          className={`flex snap-x snap-proximity gap-0 overflow-x-auto scrollbar-none [&::-webkit-scrollbar]:hidden ${
-            !loading && filteredProjects.length > 0 ? carouselMinHeight : ""
+          className={`relative flex snap-x snap-mandatory gap-0 overscroll-x-contain overflow-x-auto scrollbar-none [&::-webkit-scrollbar]:hidden ${
+            !loading && !error ? carouselMinHeight : ""
           }`}>
           <AnimatePresence mode="popLayout">
             {projectPages.map((page, pageIndex) => (
-              <div
+              <motion.div
                 key={`${activeCategory}-${cardsPerPage}-${pageIndex}`}
                 role="group"
                 aria-roledescription="slide"
                 aria-label={`Page ${pageIndex + 1} of ${projectPages.length}`}
-                className="w-full shrink-0 snap-start">
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{
+                  opacity: 0,
+                  transition: { duration: 0.18, ease: "easeIn" as const },
+                }}
+                transition={{ duration: 0.3, ease: "easeOut" as const }}
+                className="w-full shrink-0 snap-start snap-always">
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                   {page.map((project, index) => {
                     const projectIndex = pageIndex * cardsPerPage + index;
@@ -235,7 +246,7 @@ export default function Projects() {
                             </div>
                           )}
                           <p className="section-kicker">{project.category}</p>
-                          <h3 className="mt-2 text-xl font-semibold">
+                          <h3 className="mt-2 line-clamp-2 text-xl font-semibold">
                             {project.title}
                           </h3>
                           <p className="mt-2 line-clamp-2 text-sm leading-6 text-muted-foreground">
@@ -277,17 +288,25 @@ export default function Projects() {
                     );
                   })}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </AnimatePresence>
+
+          {!loading && !error && filteredProjects.length === 0 && (
+            <p
+              role="status"
+              className="flex w-full shrink-0 items-center justify-center self-center px-4 text-center text-muted-foreground">
+              No projects found.
+            </p>
+          )}
         </div>
 
-        {projectPages.length > 1 && (
-          <div
-            role="group"
-            aria-label="Project carousel pages"
-            className="mt-7 flex justify-center gap-2.5">
-            {projectPages.map((_, pageIndex) => (
+        <div
+          role="group"
+          aria-label="Project carousel pages"
+          className="mt-7 flex min-h-2.5 justify-center gap-2.5">
+          {projectPages.length > 1 &&
+            projectPages.map((_, pageIndex) => (
               <button
                 key={pageIndex}
                 type="button"
@@ -301,13 +320,7 @@ export default function Projects() {
                 }`}
               />
             ))}
-          </div>
-        )}
-        {!loading && !error && filteredProjects.length === 0 && (
-          <p className="mt-8 text-center text-muted-foreground">
-            No projects found.
-          </p>
-        )}
+        </div>
       </div>
     </section>
   );
