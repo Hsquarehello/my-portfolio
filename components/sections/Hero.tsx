@@ -74,14 +74,14 @@ export default function Hero() {
             About
           </Link>
           <Link
-            href="#projects"
-            className="transition-colors hover:text-foreground">
-            Work
-          </Link>
-          <Link
             href="#skills"
             className="transition-colors hover:text-foreground">
             Stack
+          </Link>
+          <Link
+            href="#projects"
+            className="transition-colors hover:text-foreground">
+            Work
           </Link>
           <Link
             href="#contact"
